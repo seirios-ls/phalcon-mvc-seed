@@ -9,6 +9,8 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
+        $this->view->setRenderLevel(3);
+        $this->assets->addCss('css/style.css');
 //        $this->view;
     }
 }
