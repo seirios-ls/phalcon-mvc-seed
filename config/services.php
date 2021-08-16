@@ -3,6 +3,7 @@
 use Phalcon\Mvc\View;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\View\Engine\Volt;
+use Phalcon\Session\Adapter\Files;
 use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 
@@ -34,7 +35,7 @@ $di->set(
 
         $volt->setOptions(
             [
-                "compiledPath"      => APP_PATH . '/views/',
+                "compiledPath" => APP_PATH . '/views/',
                 "compiledExtension" => ".compiled",
             ]
         );
@@ -52,4 +53,15 @@ $di->setShared('view', function () {
     ]);
     return $view;
 });
+
+$di->setShared(
+    "session",
+    function () {
+        $session = new Files();
+
+        $session->start();
+
+        return $session;
+    }
+);
 
